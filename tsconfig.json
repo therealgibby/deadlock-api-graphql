@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"strictNullChecks": true,
+		"lib": ["es6", "dom"],
+		"module": "nodenext",
+		"moduleResolution": "nodenext",
+		"target": "es6",
+		"sourceMap": true,
+		"outDir": "dist",
+		"rootDir": "src",
+		"noImplicitAny": false,
+		"noUnusedLocals": false,
+		"allowSyntheticDefaultImports": true,
+		"removeComments": true
+	},
+	"include": ["src/**/*"]
+}
