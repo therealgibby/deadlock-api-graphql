@@ -29,19 +29,19 @@ export async function fetchData<T extends AllowedDataTypes>(url: string): Promis
 	return data;
 }
 
-export function queryCache<T extends keyof DataTypeMap>(
+export async function queryCache<T extends keyof DataTypeMap>(
 	dataType: T,
 	queryType: "getAll"
-): DataTypeMap[T][] | null;
+): Promise<DataTypeMap[T][] | null>;
 
-export function queryCache<T extends keyof DataTypeMap>(
+export async function queryCache<T extends keyof DataTypeMap>(
 	dataType: T,
 	queryType: "get",
 	keyType: KeyType,
 	key: string
-): DataTypeMap[T] | null;
+): Promise<DataTypeMap[T] | null>;
 
-export function queryCache<T extends keyof DataTypeMap>(
+export async function queryCache<T extends keyof DataTypeMap>(
 	dataType: T,
 	queryType: QueryType,
 	keyType?: KeyType,
@@ -49,15 +49,15 @@ export function queryCache<T extends keyof DataTypeMap>(
 ) {
 	const cache = cacheRegistry[dataType];
 	if (!cache) return null;
+	if (cache.length() < 1) await refreshCache(dataType);
 	if (queryType === "getAll") return cache.getAll();
 	if (!keyType || !key) return null;
-	const data = cache.get(keyType, key);
-	if (!data) return null;
+	let data = cache.get(keyType, key);
 	return data;
 }
 
 // refactor to remove conditionals
-export async function refreshCache(dataType: keyof DataTypeMap): Promise<void> {
+async function refreshCache(dataType: keyof DataTypeMap): Promise<void> {
 	if (!HERO_URL || !ITEM_URL) {
 		console.error("No URLs detected. Cache did not refresh.");
 		return;

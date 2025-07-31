@@ -1,16 +1,12 @@
 import { GraphQLError } from "graphql";
-import { heroCache, itemCache, KeyType } from "../../lib/cache.js";
-import { queryCache, refreshCache } from "../../utils/dataFetch.js";
+import { KeyType } from "../../lib/cache.js";
+import { queryCache } from "../../utils/dataFetch.js";
 
 export function queries() {
 	return {
 		async heroes(_, { limit, offset }) {
-			let heroes = queryCache("Hero", "getAll");
-			if (!heroes || heroes.length < 1) {
-				await refreshCache("Hero");
-				heroes = queryCache("Hero", "getAll");
-				if (!heroes) return [];
-			}
+			let heroes = await queryCache("Hero", "getAll");
+			if (!heroes) return [];
 			if (typeof limit === "number" || typeof offset === "number") {
 				heroes = heroes.slice(
 					offset,
@@ -37,20 +33,12 @@ export function queries() {
 			if (!key || !keyType) {
 				throw new GraphQLError("You must specify the id, name, or class_name arguments.");
 			}
-			let hero = queryCache("Hero", "get", keyType, key);
-			if (!hero && heroCache.length() < 1) {
-				await refreshCache("Hero");
-				hero = queryCache("Hero", "get", keyType, key);
-			}
+			let hero = await queryCache("Hero", "get", keyType, key);
 			return hero;
 		},
 		async items(_, { itemType, limit, offset }) {
-			let items = queryCache("Item", "getAll");
-			if (!items || items.length < 1) {
-				await refreshCache("Item");
-				items = queryCache("Item", "getAll");
-				if (!items) return [];
-			}
+			let items = await queryCache("Item", "getAll");
+			if (!items) return [];
 			if (typeof itemType === "string") {
 				items = items.filter((item) => item.type === itemType);
 			}
@@ -80,11 +68,7 @@ export function queries() {
 			if (!key || !keyType) {
 				throw new GraphQLError("You must specify the id, name, or class_name arguments.");
 			}
-			let item = queryCache("Item", "get", keyType, key);
-			if (!item && itemCache.length() < 1) {
-				await refreshCache("Item");
-				item = queryCache("Item", "get", keyType, key);
-			}
+			let item = await queryCache("Item", "get", keyType, key);
 			return item;
 		},
 	};

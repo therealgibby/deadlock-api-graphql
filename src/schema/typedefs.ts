@@ -13,8 +13,8 @@ const typeDefs: string = `
         start_trained: Boolean
         image: String
         image_webp: String
-        hero: Int
-        heroes: [Int]
+        hero: Hero
+        heroes: [Hero]
         type: String
         description: ItemDescription
         update_time: Int
@@ -189,8 +189,8 @@ const typeDefs: string = `
     type WeaponItem implements Item {
         class_name: String!
         description: ItemDescription
-        hero: Int
-        heroes: [Int]
+        hero: Hero
+        heroes: [Hero]
         id: ID!
         image_webp: String
         image: String
@@ -435,8 +435,8 @@ const typeDefs: string = `
         class_name: String!
         dependant_abilities: [String]
         description: ItemDescription
-        hero: Int
-        heroes: [Int]
+        hero: Hero
+        heroes: [Hero]
         id: ID!
         image_webp: String
         image: String
@@ -1692,8 +1692,8 @@ const typeDefs: string = `
         cost: Int
         description: ItemDescription
         disabled: Boolean
-        hero: Int
-        heroes: [Int]
+        hero: Hero
+        heroes: [Hero]
         id: ID!
         image_webp: String
         image: String
@@ -2267,6 +2267,8 @@ type Item = {
 	class_name: string;
 	name: string;
 	type: string;
+	hero?: number;
+	heroes?: number[];
 };
 
 export default typeDefs;

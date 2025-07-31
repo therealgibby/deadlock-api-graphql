@@ -1,5 +1,10 @@
 import { heroResolvers } from "./hero.js";
-import { itemResolvers } from "./item.js";
+import {
+	abilityItemResolvers,
+	itemResolvers,
+	upgradeItemResolvers,
+	weaponItemResolvers,
+} from "./item.js";
 import { queries } from "./queries.js";
 
 export function resolversBuilder() {
@@ -7,5 +12,8 @@ export function resolversBuilder() {
 		Query: queries(),
 		Hero: heroResolvers(),
 		Item: itemResolvers(),
+		WeaponItem: weaponItemResolvers(),
+		AbilityItem: abilityItemResolvers(),
+		UpgradeItem: upgradeItemResolvers(),
 	};
 }
