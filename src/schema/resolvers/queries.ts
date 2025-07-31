@@ -45,21 +45,20 @@ export function queries() {
 			}
 			return hero;
 		},
-		async items(_, { limit, offset }) {
+		async items(_, { itemType, limit, offset }) {
 			let items = queryCache("Item", "getAll");
 			if (!items || items.length < 1) {
 				await refreshCache("Item");
 				items = queryCache("Item", "getAll");
 				if (!items) return [];
 			}
-			if (typeof limit === "number" && typeof offset === "number") {
-				return items.slice(offset, offset + limit);
-			} else if (typeof offset === "undefined") {
-				return items.slice(0, limit);
-			} else if (typeof limit === "undefined") {
-				return items.slice(offset);
+			if (typeof limit === "number" || typeof offset === "number") {
+				items = items.slice(
+					offset,
+					offset !== undefined && limit !== undefined ? offset + limit : limit
+				);
 			}
-			return items;
+			return items.filter((item) => item.type === itemType);
 		},
 		async item(_, { id, name, class_name }) {
 			let key: string | null = null;
