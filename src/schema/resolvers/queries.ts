@@ -52,13 +52,16 @@ export function queries() {
 				items = queryCache("Item", "getAll");
 				if (!items) return [];
 			}
+			if (typeof itemType === "string") {
+				items = items.filter((item) => item.type === itemType);
+			}
 			if (typeof limit === "number" || typeof offset === "number") {
 				items = items.slice(
 					offset,
 					offset !== undefined && limit !== undefined ? offset + limit : limit
 				);
 			}
-			return items.filter((item) => item.type === itemType);
+			return items;
 		},
 		async item(_, { id, name, class_name }) {
 			let key: string | null = null;
