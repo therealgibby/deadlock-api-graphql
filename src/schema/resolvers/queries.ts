@@ -11,12 +11,11 @@ export function queries() {
 				heroes = queryCache("Hero", "getAll");
 				if (!heroes) return [];
 			}
-			if (typeof limit === "number" && typeof offset === "number") {
-				return heroes.slice(offset, offset + limit);
-			} else if (typeof offset === "undefined") {
-				return heroes.slice(0, limit);
-			} else if (typeof limit === "undefined") {
-				return heroes.slice(offset);
+			if (typeof limit === "number" || typeof offset === "number") {
+				heroes = heroes.slice(
+					offset,
+					offset !== undefined && limit !== undefined ? offset + limit : limit
+				);
 			}
 			return heroes;
 		},
