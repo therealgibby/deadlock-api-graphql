@@ -16,24 +16,24 @@ Heroes and 4 Abilities query:
 
 ```graphql
 query {
-	heroes {
-		id
-		name
-		items {
-			signature1 {
-				name
-			}
-			signature2 {
-				name
-			}
-			signature3 {
-				name
-			}
-			signature4 {
-				name
-			}
-		}
-	}
+  heroes {
+    id
+    name
+    items {
+      signature1 {
+        name
+      }
+      signature2 {
+        name
+      }
+      signature3 {
+        name
+      }
+      signature4 {
+        name
+      }
+    }
+  }
 }
 ```
 
@@ -41,13 +41,13 @@ Hero query (Infernus):
 
 ```graphql
 query {
-	hero(id: "1") {
-		id
-		name
-		description {
-			lore
-		}
-	}
+  hero(id: "1") {
+    id
+    name
+    description {
+      lore
+    }
+  }
 }
 ```
 
@@ -55,11 +55,11 @@ Items query:
 
 ```graphql
 query {
-	items(itemType: "ability") {
-		id
-		name
-		image_webp
-	}
+  items(itemType: "ability") {
+    id
+    name
+    image_webp
+  }
 }
 ```
 
@@ -73,9 +73,9 @@ Item query:
 
 ```graphql
 query {
-	item(id: "2976789773") {
-		id
-		name
-	}
+  item(id: "2976789773") {
+    id
+    name
+  }
 }
 ```
