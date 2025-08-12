@@ -1,5 +1,6 @@
 import { queryCache } from "../../utils/dataFetch.js";
-import { Hero, Item } from "../typedefs.js";
+import { Hero } from "../types/hero.js";
+import { Item } from "../types/item.js";
 
 export function itemResolvers() {
 	return {

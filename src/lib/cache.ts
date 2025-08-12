@@ -1,5 +1,6 @@
 import NodeCache from "node-cache";
-import { Hero, Item } from "../schema/typedefs.js";
+import { Hero } from "../schema/types/hero.js";
+import { Item } from "../schema/types/item.js";
 
 class SearchableCache<T> {
 	private cacheById: NodeCache;

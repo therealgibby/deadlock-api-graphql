@@ -1,5 +1,6 @@
 import { cacheRegistry, heroCache, itemCache, KeyType } from "../lib/cache.js";
-import { Hero, Item } from "../schema/typedefs.js";
+import { Hero } from "../schema/types/hero.js";
+import { Item } from "../schema/types/item.js";
 
 type DataTypeMap = {
 	Hero: Hero;
