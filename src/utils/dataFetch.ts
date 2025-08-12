@@ -70,7 +70,6 @@ async function refreshCache(dataType: keyof DataTypeMap): Promise<void> {
 		}
 		for (const hero of heroData) {
 			heroCache.set(hero, "id", `${hero.id}`);
-			if (hero.name) heroCache.set(hero, "name", hero.name);
 			if (hero.class_name) heroCache.set(hero, "className", hero.class_name);
 		}
 	}
@@ -82,7 +81,6 @@ async function refreshCache(dataType: keyof DataTypeMap): Promise<void> {
 		}
 		for (const item of itemData) {
 			itemCache.set(item, "id", `${item.id}`);
-			if (item.name) itemCache.set(item, "name", item.name);
 			if (item.class_name) itemCache.set(item, "className", item.class_name);
 		}
 	}

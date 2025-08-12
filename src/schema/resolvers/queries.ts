@@ -15,16 +15,12 @@ export function queries() {
 			}
 			return heroes;
 		},
-		async hero(_, { id, name, class_name }) {
+		async hero(_, { id, class_name }) {
 			let key: string | null = null;
 			let keyType: KeyType | null = null;
 			if (typeof id === "number" || typeof id === "string") {
 				key = `${id}`;
 				keyType = "id";
-			}
-			if (typeof name === "string") {
-				key = `${name}`;
-				keyType = "name";
 			}
 			if (typeof class_name === "string") {
 				key = `${class_name}`;
@@ -50,16 +46,12 @@ export function queries() {
 			}
 			return items;
 		},
-		async item(_, { id, name, class_name }) {
+		async item(_, { id, class_name }) {
 			let key: string | null = null;
 			let keyType: KeyType | null = null;
 			if (typeof id === "number" || typeof id === "string") {
 				keyType = "id";
 				key = `${id}`;
-			}
-			if (typeof name === "string") {
-				keyType = "name";
-				key = `${name}`;
 			}
 			if (typeof class_name === "string") {
 				keyType = "className";

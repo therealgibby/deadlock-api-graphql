@@ -3,21 +3,16 @@ import { Hero, Item } from "../schema/typedefs.js";
 
 class SearchableCache<T> {
 	private cacheById: NodeCache;
-	private cacheByName: NodeCache;
 	private cacheByClassName: NodeCache;
 
 	constructor(ttlSeconds: number = 1800) {
 		this.cacheById = new NodeCache({ stdTTL: ttlSeconds, checkperiod: ttlSeconds / 2 });
-		this.cacheByName = new NodeCache({ stdTTL: ttlSeconds, checkperiod: ttlSeconds / 2 });
 		this.cacheByClassName = new NodeCache({ stdTTL: ttlSeconds, checkperiod: ttlSeconds / 2 });
 	}
 
 	public set(data: T, keyType: KeyType, key: string): void {
 		if (keyType === "id") {
 			this.cacheById.set(key, data);
-		}
-		if (keyType === "name") {
-			this.cacheByName.set(key, data);
 		}
 		if (keyType === "className") {
 			this.cacheByClassName.set(key, data);
@@ -27,9 +22,6 @@ class SearchableCache<T> {
 	public get(keyType: KeyType, key: string): T | undefined {
 		if (keyType === "id") {
 			return this.cacheById.get(key);
-		}
-		if (keyType === "name") {
-			return this.cacheByName.get(key);
 		}
 		if (keyType === "className") {
 			return this.cacheByClassName.get(key);
@@ -55,7 +47,7 @@ class SearchableCache<T> {
 	}
 }
 
-export type KeyType = "id" | "name" | "className";
+export type KeyType = "id" | "className";
 
 export const heroCache = new SearchableCache<Hero>();
 export const itemCache = new SearchableCache<Item>();
