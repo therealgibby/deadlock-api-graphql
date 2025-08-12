@@ -1,8 +1,8 @@
 const typeDefs: string = `
     type Query {
-        hero(id: ID, name: String, class_name: String): Hero
+        hero(id: ID, class_name: String): Hero
         heroes(limit: Int, offset: Int): [Hero]
-        item( id: ID, name: String, class_name: String): Item
+        item( id: ID, class_name: String): Item
         items(itemType: String, limit: Int, offset: Int): [Item]
     }
 
